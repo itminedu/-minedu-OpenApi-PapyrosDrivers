@@ -6,6 +6,7 @@ public enum OpenPapyrosServices {
 	,SearchDocument("search/documents")
 	,GetDocumentPdf("document/pdf")
 	,GetDocumentData("document/data")
+        ,SubmitProtocol("protocol/submit")
 	;
 
 

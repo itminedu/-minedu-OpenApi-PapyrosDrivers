@@ -13,38 +13,42 @@ import java.util.Date;
  * @author pkaratzas
  */
 public class Search {
-	public int docType;
+
+    private int docType;
     private int senderId;
-    public Date startDate;
-    public Date endDate;
-    public void setStartDate(Date startDate){
+    private Date startDate;
+    private Date endDate;
+
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    
-    public Date getStartDate(){
+
+    public Date getStartDate() {
         return startDate;
     }
-    
-    public void setEndDate(Date endDate){
+
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
-    public Date getEndDate(){
+
+    public Date getEndDate() {
         return endDate;
     }
-    public int getSenderId() {
-		return senderId;
-	}
-	public void setSenderId(int senderId) {
-		this.senderId = senderId;
-	}
 
-	public void setDocType(int docType){
-        this.docType=docType;
+    public int getSenderId() {
+        return senderId;
     }
-    
-    public int getDocType(){
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public void setDocType(int docType) {
+        this.docType = docType;
+    }
+
+    public int getDocType() {
         return docType;
     }
-    
+
 }

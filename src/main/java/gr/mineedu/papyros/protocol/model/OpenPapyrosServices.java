@@ -1,9 +1,7 @@
 package gr.mineedu.papyros.protocol.model;
 
 public enum OpenPapyrosServices {
-	PAuth("/authenticate/pauth");
-
-
+	PAuth("/pauthenticate/pauth");
 	
     private final String value;
 

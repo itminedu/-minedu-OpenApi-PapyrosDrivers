@@ -1,7 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gr.mimedu.papyros.protocol.exceptions;
 
-public class AuthenticateException extends Exception {
-
+/**
+ *
+ * @author pkaratzas
+ */
+public class ProtocolException extends Exception{
+    
     int code;
     String msg;
 
@@ -21,17 +30,18 @@ public class AuthenticateException extends Exception {
         this.code = code;
     }
 
-    public AuthenticateException() {
+    public ProtocolException() {
         super();
     }
 
-    public AuthenticateException(String msg) {
+    public ProtocolException(String msg) {
         super(msg);
     }
 
-    public AuthenticateException(Integer code, String msg) {
+    public ProtocolException(Integer code, String msg) {
         super(msg);
         this.code = code;
 
     }
+    
 }

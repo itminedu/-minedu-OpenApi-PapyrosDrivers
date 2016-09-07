@@ -16,48 +16,42 @@ import gr.mimedu.papyros.protocol.PAuthClient;
 import gr.minedu.papyros.protocol.dto.ApiKey;
 import gr.minedu.papyros.protocol.dto.Document;
 
-
-
-
 public class DocumentTest {
-private static final Logger log = Logger.getLogger(DocumentTest.class.getName());
-	
-	@Test
+
+    private static final Logger log = Logger.getLogger(DocumentTest.class.getName());
+
+    @Test
     public void getPdfNoData() throws Exception {
-     	log.info("getPdfNoData test");
-     	DocumentClient obj = new DocumentClient();
-		String docHashId = "sss";
-     	ApiKey apikey =null;
-		try {
-     		PAuthClient pauth = new PAuthClient();
-			apikey  = pauth.auth("string", "string");
-			log.info("Apikey:"+new Gson().toJson(apikey));
-			Document doc = obj.getPdf(docHashId, apikey) ;
-			FileUtils.writeByteArrayToFile(new File("c:/test/"+new Date().getTime()+".pdf"), Base64.decode(doc.getBase64().getBytes())); ;
-		} catch (Exception e) {
-			log.severe(e.getMessage());
-		}
+        log.info("getPdfNoData test");
+        DocumentClient obj = new DocumentClient();
+        String docHashId = "sss";
+        ApiKey apikey = null;
+        try {
+            PAuthClient pauth = new PAuthClient();
+            apikey = pauth.auth("string", "string");
+            log.info("Apikey:" + new Gson().toJson(apikey));
+            Document doc = obj.getPdf(docHashId, apikey);
+            FileUtils.writeByteArrayToFile(new File("c:/test/" + new Date().getTime() + ".pdf"), Base64.decode(doc.getBase64().getBytes()));;
+        } catch (Exception e) {
+            log.severe(e.getMessage());
+        }
     }
-	
-	
-	@Test
+
+    @Test
     public void getPdfData() throws Exception {
-     	log.info("getPdfData test");
-     	DocumentClient obj = new DocumentClient();
-		String docHashId = "abc12345678";
-     	ApiKey apikey =null;
-		try {
-     		PAuthClient pauth = new PAuthClient();
-			apikey  = pauth.auth("string", "string");
-			log.info("Apikey:"+new Gson().toJson(apikey));
-			Document doc = obj.getPdf(docHashId, apikey) ;
-			FileUtils.writeByteArrayToFile(new File("c:/test/"+new Date().getTime()+".pdf"), Base64.decode(doc.getBase64().getBytes())); ;
-		} catch (Exception e) {
-			log.severe(e.getMessage());
-		}
+        log.info("getPdfData test");
+        DocumentClient obj = new DocumentClient();
+        String docHashId = "abc12345678";
+        ApiKey apikey = null;
+        try {
+            PAuthClient pauth = new PAuthClient();
+            apikey = pauth.auth("string", "string");
+            log.info("Apikey:" + new Gson().toJson(apikey));
+            Document doc = obj.getPdf(docHashId, apikey);
+            FileUtils.writeByteArrayToFile(new File("c:/test/" + new Date().getTime() + ".pdf"), Base64.decode(doc.getBase64().getBytes()));;
+        } catch (Exception e) {
+            log.severe(e.getMessage());
+        }
     }
-	
-	
-	
-	
+
 }

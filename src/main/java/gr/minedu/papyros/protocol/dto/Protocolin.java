@@ -23,21 +23,39 @@ import java.io.Serializable;
 
 public class Protocolin implements Serializable{
 
-    public List<Sender> sender;
-    public String senderProtocol;
-    public Date protocolDate;
-    public List<DocCategory> docCategory;
-    public String theme;
-    public String ada;
-    public String description;
+    private Sender[] sender;
+    private String senderProtocol;
+    private Date protocolDate;
+    private DocCategory[] docCategory;
+    private String theme;
+    private String ada;
+    private String description;
+    private String document;
 
-
-    public void setSender(Sender sender) {
-        this.sender = (List<Sender>) sender;
+    public String getDocument() {
+        return document;
     }
 
-    public List getSender() {
-        return (List) sender;
+    public void setDocument(String document) {
+        this.document = document;
+    }
+    
+    
+    public Date getProtocolDate() {
+        return protocolDate;
+    }
+
+    public void setProtocolDate(Date protocolDate) {
+        this.protocolDate = protocolDate;
+    }
+
+
+    public void setSender(Sender[] sender) {
+        this.sender = sender;
+    }
+
+    public Sender[] getSender() {
+        return sender;
     }
 
     public void setSenderProt(String senderProtocol) {
@@ -53,11 +71,11 @@ public class Protocolin implements Serializable{
     }
 
 
-    public void setDocCategory(DocCategory docCategory) {
-        this.docCategory = (List<DocCategory>) docCategory;
+    public void setDocCategory(DocCategory[] docCategory) {
+        this.docCategory = docCategory;
     }
 
-    public List getDocCategory() {
+    public DocCategory[] getDocCategory() {
         return docCategory;
     }
 

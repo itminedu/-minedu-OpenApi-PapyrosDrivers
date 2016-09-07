@@ -16,20 +16,19 @@ import com.google.gson.reflect.TypeToken;
 import gr.mimedu.papyros.protocol.exceptions.AuthenticateException;
 import gr.minedu.papyros.protocol.dto.ApiKey;
 import gr.minedu.papyros.protocol.dto.Credentials;
-import gr.minedu.papyros.protocol.dto.ErrorReport;
+
 import gr.minedu.papyros.protocol.dto.ResponseModel;
-import gr.mineedu.papyros.protocol.idto.Config;
-import gr.mineedu.papyros.protocol.idto.OpenPapyrosServices;
+import gr.mineedu.papyros.protocol.model.Config;
+import gr.mineedu.papyros.protocol.model.OpenPapyrosServices;
 
 import javax.ws.rs.client.Invocation.Builder;
 
-public class PAuthClient {
+public class PAuth {
 
     Config conf = new Config();
-    private static final Logger logger = Logger.getLogger(PAuthClient.class.getName());
+    private static final Logger logger = Logger.getLogger(PAuth.class.getName());
 
     public ApiKey auth(String username, String password) throws AuthenticateException {
-        ApiKey apikey = null;
         Client client = ClientBuilder.newClient();
         String targetHost = conf.getServerurl();
         String path = OpenPapyrosServices.PAuth.getValue();
@@ -43,18 +42,21 @@ public class PAuthClient {
         Response response = builder.accept(MediaType.APPLICATION_JSON).put(Entity.entity(new Gson().toJson(c), MediaType.APPLICATION_JSON));// put(String.class);
         String responseStr = response.readEntity(String.class);
         logger.finest(responseStr);
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            apikey = new Gson().fromJson(responseStr, ApiKey.class);
-            logger.finest("apikey:" + apikey);
+        Type returnType = new TypeToken<ResponseModel<ApiKey>>() {
+        }.getType();
+        ResponseModel<ApiKey> resp = new Gson().fromJson(responseStr, returnType);//ResponseModel<ApiKey>
+        ApiKey apikey = null;
+        if (resp.getCode() != Response.Status.OK.getStatusCode() || resp.getData() == null) {
+            throw new AuthenticateException(resp.getCode(), resp.getMessage());
         } else {
-            ErrorReport errorReport = new Gson().fromJson(responseStr, ErrorReport.class);
-            throw new AuthenticateException(errorReport.getErrorCode(), errorReport.getErrorMessage());
+            apikey = resp.getData();
+            logger.finest("apikey:" + apikey);
         }
         return apikey;
     }
 
     public static void main(String args[]) {
-        PAuthClient pauth = new PAuthClient();
+        PAuth pauth = new PAuth();
         try {
             pauth.auth("test", "test2");
         } catch (AuthenticateException e) {
