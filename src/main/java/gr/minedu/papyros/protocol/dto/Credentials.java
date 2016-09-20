@@ -2,6 +2,7 @@ package gr.minedu.papyros.protocol.dto;
 
 
 
+import com.google.gson.Gson;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +16,8 @@ package gr.minedu.papyros.protocol.dto;
  */
 public class Credentials  {
     
-    public String username;
-    public String password;
+    private String username;
+    private String password;
     
     
     public Credentials(){

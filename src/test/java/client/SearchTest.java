@@ -18,20 +18,7 @@ public class SearchTest {
 
     private static final Logger log = Logger.getLogger(EAuthTest.class.getName());
 
-    @Test
-    public void searchCredentials() throws Exception {
-        log.info("searchCredentials");
-        SearchClient search = new SearchClient();
-        try {
-            Search s = new Search();
-
-            search.search(s, null);
-        } catch (AuthenticateException e) {
-            log.severe(e.getMessage());
-        } catch (SearchException e) {
-            log.severe(e.getMessage());
-        }
-    }
+  
 
     @Test
     public void searchNoData() throws Exception {
@@ -40,7 +27,7 @@ public class SearchTest {
         try {
 
             PAuthClient pauth = new PAuthClient();
-            apikey = pauth.auth("string", "string");
+            apikey = pauth.auth("anagnosg", "123456");
             log.info("Apikey:" + new Gson().toJson(apikey));
 
             SearchClient search = new SearchClient();
@@ -64,12 +51,12 @@ public class SearchTest {
         try {
 
             PAuthClient pauth = new PAuthClient();
-            apikey = pauth.auth("string", "string");
+            apikey = pauth.auth("anagnosg", "123456");
             log.info("Apikey:" + new Gson().toJson(apikey));
 
             SearchClient search = new SearchClient();
             Search s = new Search();
-            s.setSenderId(1000000);
+            s.setSenderId(1);
             List<String> docHashIds = search.search(s, apikey);
             if (docHashIds != null && docHashIds.size() == 0) {
                 log.info("docIds size is 0");
@@ -79,6 +66,7 @@ public class SearchTest {
                 }
             }
         } catch (SearchException e) {
+        	e.printStackTrace();
             log.severe(e.getMessage());
         } catch (AuthenticateException e) {
             log.severe(e.getMessage());

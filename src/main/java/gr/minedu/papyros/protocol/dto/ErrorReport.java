@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
+
 /**
  *
  * @author pkaratzas
  */
+
 public class ErrorReport implements Serializable {
 
     public int errorCode;

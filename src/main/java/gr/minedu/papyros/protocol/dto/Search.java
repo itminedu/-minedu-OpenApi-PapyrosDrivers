@@ -5,18 +5,25 @@
  */
 package gr.minedu.papyros.protocol.dto;
 
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author pkaratzas
  */
+
 public class Search {
 
     private int docType;
-    private int senderId;
-    private Date startDate;
+    private Integer senderId;
+    public void setSenderId(Integer senderId) {
+		this.senderId = senderId;
+	}
+
+	private Date startDate;
     private Date endDate;
 
     public void setStartDate(Date startDate) {
@@ -35,14 +42,11 @@ public class Search {
         return endDate;
     }
 
-    public int getSenderId() {
+    public Integer getSenderId() {
         return senderId;
     }
-
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
-    }
-
+    
+    
     public void setDocType(int docType) {
         this.docType = docType;
     }

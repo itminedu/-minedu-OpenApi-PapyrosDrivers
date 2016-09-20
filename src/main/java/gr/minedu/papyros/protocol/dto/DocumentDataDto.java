@@ -19,92 +19,133 @@ import java.io.Serializable;
  *
  * @author pkaratzas
  */
-public class DocumentDataDto implements Serializable{
+public class DocumentDataDto implements Serializable {
 
-	private String protocolNumber;
-    private Date protocolDate;
-    private int docType;
-    private List<Sender> sender;
-    private String senderProtocol;
-    private Date senderDateProtocol;
-    private List<DocCategory> docCategory;
-    private String theme;
-    public String getProtocolNumber() {
+	private String id; //HashID
+	private Integer protocolNumber; // Αριθμός Πρωτοκόλλου
+	private String protocolDate; //Ημερομηνία Πρωτοκόλλου
+	private int docType; //Τύπος Εγγράφου (1 Εισερχόμενο, 2 Εξερχόμενο)
+    private Integer sender; //ID Αποστολέα 
+	private String senderProtocol; //Αριθμός Πρωτοκόλλου Αποστολέα
+    private String senderDateProtocol; //Ημερομηνία Πρωτοκόλλου Αποστολέα
+    private Integer docCategory;  //Κατηγορία Εγγράφου 
+    private String theme; //Θέμα
+    private String ada; //ΑΔΑ
+    private String attachedDocsDescr; //Συνημμένα Περιγραφή
+    private String director; //Δ/νση Παραγωγής
+    private String[] attachedId; //Συνημμένα
+
+    public Integer getProtocolNumber() {
 		return protocolNumber;
 	}
-	public void setProtocolNumber(String protocolNumber) {
+
+	public void setProtocolNumber(Integer protocolNumber) {
 		this.protocolNumber = protocolNumber;
 	}
-	public Date getProtocolDate() {
+    public String getProtocolDate() {
 		return protocolDate;
 	}
-	public void setProtocolDate(Date protocolDate) {
+
+	public void setProtocolDate(String protocolDate) {
 		this.protocolDate = protocolDate;
 	}
-	public int getDocType() {
-		return docType;
+
+	public String getSenderDateProtocol() {
+		return senderDateProtocol;
 	}
-	public void setDocType(int docType) {
-		this.docType = docType;
+
+	public void setSenderDateProtocol(String senderDateProtocol) {
+		this.senderDateProtocol = senderDateProtocol;
 	}
-	public List<Sender> getSender() {
+	
+    public Integer getSender() {
 		return sender;
 	}
-	public void setSender(List<Sender> sender) {
+
+	public void setSender(Integer sender) {
 		this.sender = sender;
 	}
-	public String getSenderProtocol() {
-		return senderProtocol;
+
+	public Integer getDocCategory() {
+		return docCategory;
 	}
+
+	public void setDocCategory(Integer docCategory) {
+		this.docCategory = docCategory;
+	}
+	
+    public void setDocType(int docType) {
+        this.docType = docType;
+    }
+
+    public int getDocType() {
+        return docType;
+    }
+
+    
+
+    public void setSenderProt(String senderProtocol) {
+        this.senderProtocol = senderProtocol;
+    }
+
+    public String getSenderProtocol() {
+        return senderProtocol;
+    }
+
+    
+
+    public String[] getAttachedId() {
+        return attachedId;
+    }
+
+    public void setAttachedId(String[] attachedId) {
+        this.attachedId = attachedId;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+   
+
+    public String getAda() {
+        return ada;
+    }
+
+    public void setAttachedDocsDescr(String attachedDocsDescr) {
+        this.attachedDocsDescr = attachedDocsDescr;
+    }
+
+    public String getAttachedDocsDescr() {
+        return attachedDocsDescr;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public void setSenderProtocol(String senderProtocol) {
 		this.senderProtocol = senderProtocol;
 	}
-	public Date getSenderDateProtocol() {
-		return senderDateProtocol;
-	}
-	public void setSenderDateProtocol(Date senderDateProtocol) {
-		this.senderDateProtocol = senderDateProtocol;
-	}
-	public List<DocCategory> getDocCategory() {
-		return docCategory;
-	}
-	public void setDocCategory(List<DocCategory> docCategory) {
-		this.docCategory = docCategory;
-	}
-	public String getTheme() {
-		return theme;
-	}
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
-	public String getAda() {
-		return ada;
-	}
+
 	public void setAda(String ada) {
 		this.ada = ada;
 	}
-	public String getAttachedDocsDescr() {
-		return attachedDocsDescr;
-	}
-	public void setAttachedDocsDescr(String attachedDocsDescr) {
-		this.attachedDocsDescr = attachedDocsDescr;
-	}
-	public String getDirector() {
-		return director;
-	}
-	public void setDirector(String director) {
-		this.director = director;
-	}
-	public List<String> getAttachedId() {
-		return attachedId;
-	}
-	public void setAttachedId(List<String> attachedId) {
-		this.attachedId = attachedId;
-	}
-	private String ada;
-	private String attachedDocsDescr;
-	private String director;
-	private List<String> attachedId;
-    
-    
+
 }

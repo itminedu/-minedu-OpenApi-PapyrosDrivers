@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import gr.mimedu.papyros.protocol.exceptions.AuthenticateException;
 import gr.mimedu.papyros.protocol.exceptions.ProtocolException;
 import gr.mimedu.papyros.protocol.exceptions.SearchException;
+import gr.mimedu.papyros.protocol.utils.GsonUtils;
 import gr.minedu.papyros.protocol.dto.ApiKey;
 import gr.minedu.papyros.protocol.dto.ErrorReport;
 import gr.minedu.papyros.protocol.dto.ProtocolNumber;
@@ -42,7 +43,7 @@ public class ProtocolSubmitClient {
     Config conf = new Config();
     private static final Logger logger = Logger.getLogger(Protocolin.class.getName());
 
-    public ProtocolNumber submitProtocol(Protocolin protocolin, ApiKey apikey, File file) throws AuthenticateException, IOException, ProtocolException {
+    public ProtocolNumber submitProtocol(Protocolin protocolin, ApiKey apikey) throws AuthenticateException, IOException, ProtocolException {
         if (apikey == null) {
             throw new AuthenticateException(0, "Api key is null");
         }
@@ -54,10 +55,9 @@ public class ProtocolSubmitClient {
         logger.fine("path: " + path);
         WebTarget target = client.target(targetHost).path(path);
         Builder builder = target.request();
-        byte[] bytes = Base64.encode(FileUtils.readFileToByteArray(file));
-        String document = new String(bytes);
-        protocolin.setDocument(document);
-        Response response = builder.header("api_key", apikey.getApiKey()).accept(MediaType.APPLICATION_JSON).post(Entity.entity(new Gson().toJson(protocolin), MediaType.APPLICATION_JSON));// put(String.class);
+       
+        //protocolin.setDocument(document);
+        Response response = builder.header("api_key", apikey.getApiKey()).accept(MediaType.APPLICATION_JSON).post(Entity.entity( GsonUtils.build().toJson(protocolin), MediaType.APPLICATION_JSON));// put(String.class);
         String responseStr = response.readEntity(String.class);
         logger.fine(responseStr);
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {

@@ -37,9 +37,8 @@ public class PAuthClient {
         WebTarget target = client.target(targetHost).path(path);
         logger.fine("target:" + target);
         Builder builder = target.request();
-        Credentials c = new Credentials();
-        c.username = username;
-        c.password = password;
+        Credentials c = new Credentials();c.setUsername(username); c.setPassword(password);
+        
         Response response = builder.accept(MediaType.APPLICATION_JSON).put(Entity.entity(new Gson().toJson(c), MediaType.APPLICATION_JSON));// put(String.class);
         String responseStr = response.readEntity(String.class);
         logger.finest(responseStr);

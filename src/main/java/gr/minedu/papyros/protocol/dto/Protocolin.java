@@ -5,102 +5,92 @@
  */
 package gr.minedu.papyros.protocol.dto;
 
-
+//import com.wordnik.swagger.annotations.ApiModel;
 import java.util.Date;
-import java.util.List;
-
-
 
 import gr.minedu.papyros.protocol.dto.DocCategory;
 import gr.minedu.papyros.protocol.dto.Sender;
+
 
 import java.io.Serializable;
 
 /**
  *
- * @author pkaratzas
+ * @author anagnosg
  */
 
-public class Protocolin implements Serializable{
+public class Protocolin implements Serializable {
 
-    private Sender[] sender;
-    private String senderProtocol;
-    private Date protocolDate;
-    private DocCategory[] docCategory;
-    private String theme;
-    private String ada;
-    private String description;
-    private String document;
+    private Integer senderId; //ID Αποστολέα 
+	private String senderProtocol; //Αριθμός Πρωτοκόλλου Αποστολέα
+    private String senderProtocolDate;//Ημερομηνία Πρωτοκόλλου Αποστολέα //της μορφής DD/MM/YYYY
+	private Integer docCategory;//Κατηγορία Εγγράφου 
+    private String theme;//Θέμα
+    private String ada; //ΑΔΑ
+	private String description; //Συνημμένα Περιγραφή
+    private DocumentDto mainDoc; //Main DOC
+	private DocumentDto[] attachedDoc; //Συνημμένα Αρχεία Εγγράφων
 
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-    
-    
-    public Date getProtocolDate() {
-        return protocolDate;
-    }
-
-    public void setProtocolDate(Date protocolDate) {
-        this.protocolDate = protocolDate;
-    }
-
-
-    public void setSender(Sender[] sender) {
-        this.sender = sender;
-    }
-
-    public Sender[] getSender() {
-        return sender;
-    }
-
+	
+	public Integer getSenderId() {
+		return senderId;
+	}
+	
+	public void setSenderId(Integer senderId) {
+		this.senderId = senderId;
+	}
+	public String getSenderProtocolDate() {
+		return senderProtocolDate;
+	}
+	public void setSenderProtocolDate(String senderProtocolDate) {
+		this.senderProtocolDate = senderProtocolDate;
+	}
+	public Integer getDocCategory() {
+		return docCategory;
+	}
+	public void setDocCategory(Integer docCategory) {
+		this.docCategory = docCategory;
+	}
+	public String getAda() {
+		return ada;
+	}
+	public DocumentDto getMainDoc() {
+		return mainDoc;
+	}
+	public void setMainDoc(DocumentDto mainDoc) {
+		this.mainDoc = mainDoc;
+	}
+	public void setSenderProtocol(String senderProtocol) {
+		this.senderProtocol = senderProtocol;
+	}
+	public void setAda(String ada) {
+		this.ada = ada;
+	}
     public void setSenderProt(String senderProtocol) {
         this.senderProtocol = senderProtocol;
     }
-
     public String getSenderProtocol() {
         return senderProtocol;
     }
-
-    public void setDate(Date protocolDate) {
-        this.protocolDate = protocolDate;
-    }
-
-
-    public void setDocCategory(DocCategory[] docCategory) {
-        this.docCategory = docCategory;
-    }
-
-    public DocCategory[] getDocCategory() {
-        return docCategory;
-    }
-
+    
     public void setTheme(String theme) {
         this.theme = theme;
     }
-
+    
     public String getTheme() {
         return theme;
     }
-
-    public void setADA(String ada) {
-        this.ada = ada;
+    public String getDescription() {
+        return description;
     }
-
-    public String getAda() {
-        return ada;
-    }
-
-    public void setDescriptin(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getdescription() {
-        return description;
+    public DocumentDto[] getAttachedDoc() {
+        return attachedDoc;
+    }
+    public void setAttachedDoc(DocumentDto[] attachedDoc) {
+        this.attachedDoc = attachedDoc;
     }
 
 }

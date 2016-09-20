@@ -44,7 +44,7 @@ public class SearchClient {
         //headers.get("api_key")
         Response response = builder.header("api_key", apikey.getApiKey()).accept(MediaType.APPLICATION_JSON).post(Entity.entity(new Gson().toJson(search), MediaType.APPLICATION_JSON));// put(String.class);
         String responseStr = response.readEntity(String.class);
-        logger.finest(responseStr);
+        logger.finest("search response:"+responseStr);
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             Type returnType = new TypeToken<List<String>>() {

@@ -15,28 +15,35 @@ import java.io.Serializable;
 
 public class DocCategory implements Serializable{
 
-    public int id;
-    public String category;
-
-    public DocCategory() {
-        this.id = id;
-        this.category = category;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    private int id;
+    private String category;
+//    private String senderName;
+    
     public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setcategory(String senderName) {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public DocCategory() {
+        this.id = id;
         this.category = category;
     }
 
-    public String getSenderName() {
-        return category;
-    }
+   
+   
+
+    
 
 }

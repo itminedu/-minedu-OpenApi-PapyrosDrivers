@@ -1,23 +1,21 @@
 package gr.mimedu.papyros.protocol;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.logging.Logger;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import gr.mimedu.papyros.protocol.exceptions.AuthenticateException;
 import gr.mimedu.papyros.protocol.exceptions.SearchException;
+import gr.mimedu.papyros.protocol.utils.GsonUtils;
 import gr.minedu.papyros.protocol.dto.ApiKey;
 import gr.minedu.papyros.protocol.dto.Document;
 
@@ -59,13 +57,14 @@ public class DocumentClient {
 	}
 	
 	
-	public DocumentDataDto getDocumentData(String docHashId,ApiKey apikey) throws SearchException, AuthenticateException {
+	public DocumentDataDto getDocumentData(String docHashId,ApiKey apikey) throws SearchException, AuthenticateException, UnsupportedEncodingException {
 		if(apikey==null){throw  new AuthenticateException(0,"Api key is null");}
 		
 		DocumentDataDto output = new DocumentDataDto();
 		Client client = ClientBuilder.newClient();
 		String targetHost=conf.getServerurl();
-		String path = OpenPapyrosServices.GetDocumentData .getValue()+"/"+docHashId;
+		String urlEncoded=URLEncoder.encode(docHashId,"UTF-8");
+		String path = OpenPapyrosServices.GetDocumentData .getValue()+"/"+urlEncoded;
 		logger.fine("path:"+path);
 		WebTarget target = client.target(targetHost).path(path);
 		logger.fine("target:"+target);
@@ -73,10 +72,11 @@ public class DocumentClient {
         //headers.get("api_key")
         Response response  =  builder.header("api_key", apikey.getApiKey()).accept(MediaType.APPLICATION_JSON).get();// put(String.class);
         String responseStr = response.readEntity(String.class);
-        logger.finest(responseStr);
+        logger.finest("getDocumentData responseStr: "+responseStr);
         
         if(response.getStatus()==Response.Status.OK.getStatusCode()){
-            output = new Gson().fromJson(responseStr,DocumentDataDto.class) ;
+            output = GsonUtils.build().fromJson(responseStr,DocumentDataDto.class) ;
+        	//output = new Gson().fromJson(responseStr, DocumentDataDto.class);
         }
         else{
         	ErrorReport errorReport =  new Gson().fromJson(responseStr,ErrorReport.class) ;	

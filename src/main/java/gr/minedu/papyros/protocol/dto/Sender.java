@@ -14,14 +14,13 @@ import java.io.Serializable;
 
 public class Sender implements Serializable{
     
-    public int id;
-    public String senderName;
-    
+    private int id;
+    private String senderName;
     
     public Sender(){
-        this.id=id;
-        this.senderName=senderName;
+        
     }
+    
     
     public void setId(int id){
         this.id=id;

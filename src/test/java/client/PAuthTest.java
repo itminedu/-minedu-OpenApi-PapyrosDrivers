@@ -41,7 +41,7 @@ public class PAuthTest {
      	log.info("pauthCorrect test");
      	PAuthClient pauth = new PAuthClient();
 		try {
-			ApiKey apikey  = pauth.auth("string", "string");
+			ApiKey apikey  = pauth.auth("anagnosg", "123456");
 			log.info("Apikey:"+new Gson().toJson(apikey));
 		} catch (AuthenticateException e) {
 			

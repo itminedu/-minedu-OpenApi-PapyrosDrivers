@@ -1,8 +1,10 @@
 package gr.minedu.papyros.protocol.dto;
 
 public class Document {
-	String base64;
-
+    
+    
+	private String base64;
+	
 	public String getBase64() {
 		return base64;
 	}
