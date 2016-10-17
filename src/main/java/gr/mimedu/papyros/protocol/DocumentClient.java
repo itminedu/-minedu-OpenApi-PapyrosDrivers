@@ -14,12 +14,14 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
 import gr.mimedu.papyros.protocol.exceptions.AuthenticateException;
+import gr.mimedu.papyros.protocol.exceptions.DocumentException;
 import gr.mimedu.papyros.protocol.exceptions.SearchException;
 import gr.mimedu.papyros.protocol.utils.GsonUtils;
 import gr.minedu.papyros.protocol.dto.ApiKey;
 import gr.minedu.papyros.protocol.dto.Document;
 
 import gr.minedu.papyros.protocol.dto.DocumentDataDto;
+import gr.minedu.papyros.protocol.dto.DocumentDto;
 import gr.minedu.papyros.protocol.dto.ErrorReport;
 import gr.minedu.papyros.protocol.dto.Search;
 import gr.mineedu.papyros.protocol.idto.Config;
@@ -30,10 +32,10 @@ public class DocumentClient {
 	private static final Logger logger = Logger.getLogger(Search.class.getName());
 	
 	
-	public Document getPdf(String docHashId,ApiKey apikey) throws SearchException, AuthenticateException {
+	public DocumentDto getPdf(String docHashId,ApiKey apikey) throws DocumentException, AuthenticateException {
 		if(apikey==null){throw  new AuthenticateException(0,"Api key is null");}
 		
-		Document output = new Document();
+		DocumentDto output = new DocumentDto();
 		Client client = ClientBuilder.newClient();
 		String targetHost=conf.getServerurl();
 		String path = OpenPapyrosServices.GetDocumentPdf.getValue()+"/"+docHashId;
@@ -47,11 +49,11 @@ public class DocumentClient {
         logger.finest(responseStr);
         
         if(response.getStatus()==Response.Status.OK.getStatusCode()){
-            output = new Gson().fromJson(responseStr,Document.class) ;
+            output = new Gson().fromJson(responseStr,DocumentDto.class) ;
         }
         else{
         	ErrorReport errorReport =  new Gson().fromJson(responseStr,ErrorReport.class) ;	
-        	throw new SearchException(errorReport.getErrorCode(),errorReport.getErrorMessage());
+        	throw new DocumentException(errorReport.getErrorCode(),errorReport.getErrorMessage());
         }
         return output;
 	}

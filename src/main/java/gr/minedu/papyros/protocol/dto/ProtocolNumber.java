@@ -18,7 +18,16 @@ public class ProtocolNumber {
 
     public String docId;
     public int protocolYear;
-    public String protocolNumber;
+    public String protocolDate;
+    public String getProtocolDate() {
+		return protocolDate;
+	}
+
+	public void setProtocolDate(String protocolDate) {
+		this.protocolDate = protocolDate;
+	}
+
+	public String protocolNumber;
     public List<DocumentInfo> attachments = new ArrayList<DocumentInfo>();
     
     

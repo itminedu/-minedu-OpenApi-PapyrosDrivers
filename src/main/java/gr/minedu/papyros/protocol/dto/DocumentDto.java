@@ -11,11 +11,19 @@ package gr.minedu.papyros.protocol.dto;
  */
 public class DocumentDto {
 
-    private String document;
+    private Document document;
     private String fileName;
     private String description;
     
-    public String getDescription() {
+    public Document getDocument() {
+		return document;
+	}
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
+	public String getDescription() {
 		return description;
 	}
 
@@ -31,12 +39,5 @@ public class DocumentDto {
         this.fileName = fileName;
     }
     
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
+   
 }
