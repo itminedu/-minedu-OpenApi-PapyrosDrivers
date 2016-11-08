@@ -28,7 +28,7 @@ minedu-OpenApi-PapyrosDrivers
 **REST**, και για τη χρήση τους απαιτείται η αποστολή κατάλληλα διαμορφωμένων
 HTTP αιτημάτων. Αναλυτικό Documentation καθώς και δοκιμαστικές κλήσεις των
 υπηρεσιών, μπορεί κάποιος να βρει, στο
-https://protocoltest.minedu.gov.gr/openpapyros/swagger2/
+https://protocoltest.minedu.gov.gr/openpapyros/
 
  
 
@@ -62,6 +62,8 @@ JSON.
 
  
 
+Το senderId του test χρήστη είναι 100000001
+
 ### Εξέλιξη του API και ενημερώσεις
 
 Σε όσες περιπτώσεις κρίνεται απολύτως απαραίτητο, θα πραγματοποιούνται
@@ -72,14 +74,9 @@ JSON.
 
  
 
-Api Υπηρεσιών 
-
---------------
+Api Υπηρεσιών
 
 ### *Πρωτοκόλληση Εγγράφου*
-
- 
--
 
 **Input Values**
 
@@ -174,3 +171,157 @@ hash ID Εγγράφου
 **Output Values**
 
 Το έγγραφο ως PDF αν είναι γνωστός τύπος αλλιώς το πρωτογενές έγγραφο
+
+ 
+
+ 
+
+Δοκιμάστικα Request για το περιβάλλον δοκιμών
+---------------------------------------------
+
+ 
+
+Url : https://protocoltest.minedu.gov.gr/openpapyros/
+
+ 
+
+### Υπηρεσία authenticate
+
+/pauthenticate/pauth
+
+ 
+
+Request
+
+{
+
+"username": "test",
+
+"password": "123456"
+
+}
+
+Curl
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
+  "username": "test",
+  "password": "123456"
+}' 'https://protocoltest.minedu.gov.gr:443/openpapyros/api/pauthenticate/pauth'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+Response
+
+{ "apiKey":
+"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMDAwIn0.ac5cS-vcVmBLO9zdY3zn1MF-UznrG\_JpkEyWPyL3GvE"
+}
+
+ 
+
+ 
+
+### Υποβολή Εγγράφου
+
+/protocol/submit
+
+ 
+
+Request
+
+{
+
+"senderId": 100000003,
+
+"senderProtocol": "string",
+
+"senderProtocolDate": "10/10/2017",
+
+"docCategory":20,
+
+"theme": "string",
+
+"ada": "string",
+
+"description": "string",
+
+"mainDoc": {
+
+"document": {
+
+"base64": "zpXOr869zrHOuSDOvM65zrEgzrTOv866zrnOvM6uIA=="
+
+},
+
+"fileName": "string",
+
+"description": "string"
+
+},
+
+"attachedDoc": [
+
+{
+
+"document": {
+
+"base64": "zpXOr869zrHOuSDOvM65zrEgzrTOv866zrnOvM6uIA=="
+
+},
+
+"fileName": "string",
+
+"description": "string"
+
+}
+
+]
+
+}
+
+ 
+
+Curl
+
+ 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'api_key: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMDAwIn0.ac5cS-vcVmBLO9zdY3zn1MF-UznrG_JpkEyWPyL3GvE' -d '{
+  "senderId": 100000003,
+  "senderProtocol": "string",
+  "senderProtocolDate": "10/10/2017",
+  "docCategory":20,
+  "theme": "string",
+  "ada": "string",
+  "description": "string",
+  "mainDoc": {
+    "document": {
+      "base64": "zpXOr869zrHOuSDOvM65zrEgzrTOv866zrnOvM6uIA=="
+    },
+    "fileName": "string",
+    "description": "string"
+  },
+  "attachedDoc": [
+    {
+      "document": {
+        "base64": "zpXOr869zrHOuSDOvM65zrEgzrTOv866zrnOvM6uIA=="
+      },
+      "fileName": "string",
+      "description": "string"
+    }
+  ]
+}' 'https://protocoltest.minedu.gov.gr:443/openpapyros/api/protocol/submit'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+ 
+
+Response
+
+ 
+
+{ "docId": "oXmDQDm1h4GQ3%2Bw%2BWly6iw%3D%3D", "protocolYear": 2016,
+"protocolDate": "18/10/2016", "protocolNumber": "157", "attachments": [ {
+"docId": "tM8P%2BIxE%2FdTXk%2FjIw2qrbA%3D%3D", "description": "" } ] }
